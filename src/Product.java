@@ -5,7 +5,7 @@ public class Product
     private String ID;
     private double cost;
 
-    // Constructor
+
     public Product(String name, String description, String ID, double cost)
     {
         this.name = name;
@@ -14,13 +14,7 @@ public class Product
         this.cost = cost;
     }
 
-    // Overloaded constructor
-    public Product(String name, String ID)
-    {
-        this(name, "", ID, 0.0);
-    }
 
-    // Getters
     public String getName()
     {
         return name;
@@ -41,7 +35,7 @@ public class Product
         return cost;
     }
 
-    // Setters
+
     public void setDescription(String description)
     {
         this.description = description;
@@ -52,7 +46,7 @@ public class Product
         this.cost = cost;
     }
 
-    // Other methods
+
     public String toCSV()
     {
         return name + "," + description + "," + ID + "," + cost;
@@ -86,5 +80,34 @@ public class Product
         if (!name.equals(product.name)) return false;
         if (!description.equals(product.description)) return false;
         return ID.equals(product.ID);
+    }
+
+    public String toJSONRecord()
+    {
+        String retString = "";
+        char DQ = '\u0022';  // Assign the double quote char to a variable
+        retString =  "{" + DQ + "IDNum" + DQ + ":" + DQ + this.name + DQ + ",";
+        retString += DQ + "firstName" + DQ + ":" + DQ + this.description + DQ + ",";
+        retString += " " + DQ + "lastName"  + DQ + ":" + DQ + this.ID + DQ + ",";
+        retString += " " + DQ + "YOB"  + DQ + ":" + this.cost + "}";
+
+        return retString;
+    }
+
+    public String toXMLRecord()
+    {
+        String retString = "";
+
+        retString = "<Person>" + "<IDNum>" + this.name + "</IDNum>";
+        retString += "<firstName>" + this.description + "</firstName>";
+        retString += "<lastName>" + this.ID + "</lastName>";
+        retString += "<YOB>" + this.cost + "</YOB></Person>";
+
+        return retString;
+    }
+
+    public String toCSVRecord()
+    {
+        return  this.name + ", " + this.description + "," + this.ID + "," + cost;
     }
 }

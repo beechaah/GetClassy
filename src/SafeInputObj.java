@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class SafeInputObj
 {
-    static Scanner pipe;
+    static Scanner in = new Scanner(System.in);
 
     public SafeInputObj(Scanner pipe)
     {
-        this.pipe = pipe;
+        this.in = in;
     }
 
     public static String getNonZeroLenString(String prompt)
@@ -16,7 +16,7 @@ public class SafeInputObj
         do
         {
             System.out.print(prompt + ": ");
-            retVal = pipe.nextLine();
+            retVal = in.nextLine();
             if(retVal.isEmpty())
             {
                 System.out.println("You must enter at least one character!");
@@ -26,7 +26,7 @@ public class SafeInputObj
         return retVal;
     }
 
-    public int getInt(String prompt)
+    public static int getInt(String prompt)
     {
         int retVal = 0;
         String trash = "";
@@ -35,15 +35,15 @@ public class SafeInputObj
         do
         {
             System.out.print(prompt + ": ");
-            if(pipe.hasNextInt())
+            if(in.hasNextInt())
             {
-                retVal = pipe.nextInt();
-                pipe.nextLine();
+                retVal = in.nextInt();
+                in.nextLine();
                 done = true;
             }
             else
             {
-                trash = pipe.nextLine();
+                trash = in.nextLine();
                 System.out.println("You must enter a valid integer not " + trash);
             }
 
@@ -62,15 +62,15 @@ public class SafeInputObj
         do
         {
             System.out.print(prompt + ": ");
-            if(pipe.hasNextDouble())
+            if(in.hasNextDouble())
             {
-                retVal = pipe.nextDouble();
-                pipe.nextLine();
+                retVal = in.nextDouble();
+                in.nextLine();
                 done = true;
             }
             else
             {
-                trash = pipe.nextLine();
+                trash = in.nextLine();
                 System.out.println("You must enter a valid double not " + trash);
             }
 
@@ -89,10 +89,10 @@ public class SafeInputObj
         do
         {
             System.out.print(prompt +  " [" + low + " - " + high + "]: ");
-            if(pipe.hasNextInt())
+            if(in.hasNextInt())
             {
-                retVal = pipe.nextInt();
-                pipe.nextLine();
+                retVal = in.nextInt();
+                in.nextLine();
 
                 if(retVal >= low && retVal <= high)
                 {
@@ -105,7 +105,7 @@ public class SafeInputObj
             }
             else
             {
-                trash = pipe.nextLine();
+                trash = in.nextLine();
                 System.out.println("You must enter a valid integer not " + trash);
             }
 
@@ -114,7 +114,7 @@ public class SafeInputObj
         return retVal;
     }
 
-    public double getRangedDouble(String prompt, double low, double high)
+    public static double getRangedDouble(String prompt, double low, double high)
     {
         double retVal = 0;
         String trash = "";
@@ -123,10 +123,10 @@ public class SafeInputObj
         do
         {
             System.out.print(prompt +  " [" + low + " - " + high + "]: ");
-            if(pipe.hasNextDouble())
+            if(in.hasNextDouble())
             {
-                retVal = pipe.nextDouble();
-                pipe.nextLine();
+                retVal = in.nextDouble();
+                in.nextLine();
 
                 if(retVal >= low && retVal <= high)
                 {
@@ -139,7 +139,7 @@ public class SafeInputObj
             }
             else
             {
-                trash = pipe.nextLine();
+                trash = in.nextLine();
                 System.out.println("You must enter a valid double not " + trash);
             }
 
@@ -158,7 +158,7 @@ public class SafeInputObj
         do
         {
             System.out.println(prompt + "[Yy/Nn]: ");
-            input = pipe.nextLine();
+            input = in.nextLine();
             if(input.isEmpty())
             {
                 System.out.println("You must enter Y or N!");
@@ -184,7 +184,7 @@ public class SafeInputObj
     }
 
 
-    public String getRegExString(String prompt, String regEx)
+    public static String getRegExString(String prompt, String regEx)
     {
         String retVal = "";
         boolean done = false;
@@ -192,7 +192,7 @@ public class SafeInputObj
         do
         {
             System.out.print(prompt + regEx + ": ");
-            retVal = pipe.nextLine();
+            retVal = in.nextLine();
             if(retVal.matches(regEx))
             {
                 done = true;
